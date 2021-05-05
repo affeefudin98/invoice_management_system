@@ -10,14 +10,20 @@ class Paymethod extends Model
     use HasFactory;
 
     protected $fillable = [
+        'bank_name',
         'bank_no',
-        'method',
-        'invoice_id'
+        'method'
     ];
 
     //one payment method have many invoices
     public function invoices() 
     {
         return $this->hasMany(Invoice::class);
+    }
+
+    //one payment method belongs to one user
+    public function user() 
+    {
+        return $this->belongsTo(Invoice::class);
     }
 }

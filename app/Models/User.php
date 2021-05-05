@@ -18,9 +18,9 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'ic_no',
         'email',
-        'password',
-        'ic_no'
+        'password'
     ];
 
     /**
@@ -55,8 +55,14 @@ class User extends Authenticatable
     }
 
     //one user can generate one invoice
-    public function invoice() 
+    public function invoices() 
     {
-        return $this->hasOne(Invoice::class);
+        return $this->hasMany(Invoice::class);
+    }
+
+    //one user can add many payment methods
+    public function paymethods()
+    {
+        return $this->hasMany(Paymethod::class);
     }
 }

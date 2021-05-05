@@ -16,8 +16,7 @@ class Company extends Model
         'email',
         'website',
         'PIC_name',
-        'PIC_id',
-        'user-id'
+        'PIC_id'
     ];
 
     //one company can buy many product
