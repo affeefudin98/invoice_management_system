@@ -34,8 +34,10 @@
                             <table id="invoices" class="table table-striped" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th>Company Name</th>
-                                        <th>Total Owed</th>
+                                        {{-- <th>Total Owed</th> --}}
+                                        <th>From</th>
+                                        <th>To</th>
+                                        <th>Paymethod</th>
                                         <th>Date created</th>
                                         <th>Due date</th>
                                     </tr>
@@ -43,12 +45,12 @@
                                 <tbody>
                                     @foreach ($invoices as $invoice)
                                     <tr>
-                                        <td>{{ $invoice->company->name }}</td>
-                                        <td>{{ $invoice->products->total_price }}</td>
-                                        <td>{{ $invoice->company->name }}</td>
-                                        <td>{{ $invoice->company->name }}</td>
-                                        <td>{{ $invoice->description }}</td>
-                                        <td>{{ $invoice->price }}</td>
+                                        {{-- <td>{{ $invoice->products->total_price }}</td> --}}
+                                        <td>{{ $invoice->sender }}</td>
+                                        <td>{{ $invoice->receiver }}</td>
+                                        <td>{{ $invoice->paymethod()->bank_name }}</td>
+                                        <td>{{ $invoice->date_created }}</td>
+                                        <td>{{ $invoice->due_date }}</td>
                                     </tr>
                                         
                                     @endforeach

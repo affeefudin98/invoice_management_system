@@ -24,6 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/companies', 'CompanyController@index')->name('companies.index');
 Route::get('/add-company', 'CompanyController@create')->name('companies.create');
 Route::post('/store-company', 'CompanyController@store')->name('companies.store');
+Route::get('/generate-pdf', 'CompanyController@pdfview')->name('companies.pdfview');
 
 Route::get('/products', 'ProductController@index')->name('products.index');
 Route::get('/add-product', 'ProductController@create')->name('products.create');
@@ -36,3 +37,4 @@ Route::post('/store-paymethod', 'PaymethodController@store')->name('paymethods.s
 Route::get('/invoices', 'InvoiceController@index')->name('invoices.index');
 Route::get('/add-invoice', 'InvoiceController@create')->name('invoices.create');
 Route::post('/store-invoice', 'InvoiceController@store')->name('invoices.store');
+

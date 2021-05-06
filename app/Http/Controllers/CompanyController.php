@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Company;
+use PDF;
 
 use Illuminate\Http\Request;
 
@@ -44,4 +45,18 @@ class CompanyController extends Controller
         return redirect('/companies');
         
     }
+
+    public function pdfview(Request $request)
+    {
+        $data = Company::all();
+
+        // share data to view
+        view()->share('companies',$data);
+        PDF::setOptions(['dpi'=>'150', 'defaultFault' => 'sans-senrif']);
+        $pdf = PDF::loadView('pdf_view', $data);
+  
+        // download PDF file with download method
+        return $pdf->download('pdf_file.pdf');
+    }
+
 }

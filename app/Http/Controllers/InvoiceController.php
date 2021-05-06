@@ -28,17 +28,29 @@ class InvoiceController extends Controller
     {
         $this->validate(request(), [
             'date_created' => 'required',
-            'due_date'=>'required'
+            'due_date'=>'required',
+            'sender'=>'required',
+            'receiver'=>'required',
+            'term'=>'required'
         ]);
 
         auth()->user()->invoices()->create([
             'date_created'=>$request->date_created,
-            'due_date'=>$request->due_date
+            'due_date'=>$request->due_date,
+            'sender'=>$request->sender,
+            'receiver'=>$request->receiver,
+            'note'=>$request->note,
+            'term'=>$request->term
         ]);
+
+        /*if ($request->produts) {
+            $invoice->products()->attach($request->products);
+        }*/
 
         session()->flash('success', 'Invoice created and send to client successfully.');
 
         return redirect('/invoices');
         
     }
+
 }

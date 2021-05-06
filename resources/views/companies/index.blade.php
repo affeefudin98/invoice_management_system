@@ -59,6 +59,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        <a class="btn btn-primary" href="{{ route('companies.pdfview') }}">Export to PDF</a>
                     </div>
                 </div>
             </div>
