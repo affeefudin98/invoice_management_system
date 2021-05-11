@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
     <div class="container">
@@ -44,6 +44,7 @@
                                        <option value="{{ $company->id }}"> {{ $company->name }} </option>
                                    @endforeach
                                </select>
+                               {{-- <textarea name="" id="" cols="30" rows="10" class="form-control">{{ $companies }}</textarea> --}}
                             </div>
                             <div class="form-group">
                                 <label for="receiver">To:</label>
@@ -53,6 +54,15 @@
                                    @endforeach
                                </select>
                             </div>
+                            <div class="form-group">
+                                <label for="company_id">Company Id:</label>
+                               <select name="company_id" id="company_id" name="company_id" class="form-control">
+                                   @foreach ($companies as $company)
+                                       <option value="{{ $company->id }}"> {{ $company->name }} </option>
+                                   @endforeach
+                               </select>
+                            </div>
+
                             <div class="form-group">
                                 <label for="product_id">Add Item:</label>
                                 <select name="product_id" id="" class="form-control">

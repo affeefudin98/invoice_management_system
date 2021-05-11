@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Paymethod;
+use PDF;
 
 class PaymethodController extends Controller
 {
@@ -37,4 +38,21 @@ class PaymethodController extends Controller
         return redirect('/paymethods');
         
     }
+
+    public function pdfview(Request $request)
+    {
+        $paymethods = Paymethod::all(); 
+       
+        //load path 
+        $pdf = PDF::loadView('paymethods.pdf',compact('paymethods')); 
+        //name of download file 
+        return $pdf->download('ListPayMethods.pdf');
+        //return $pdf->stream();
+
+        // For send by email, I use :
+        // $file = PDF::loadView('invoices', $data)->stream(); $message->attachData($file, $filename, [ 'mime' => 'application/pdf', ]);
+
+        
+    }
+
 }

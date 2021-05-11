@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
     <div class="container">
@@ -59,29 +59,10 @@
                                 </tbody>
                             </table>
                         </div>
-                        <a class="btn btn-primary" href="{{ route('companies.pdfview') }}">Export to PDF</a>
+                        <a class="btn btn-primary" href="{{ route('companies.pdf') }}">Export to PDF</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-@endsection
-
-@section('css')
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap5.min.css" rel="stylesheet">
-
-@endsection
-
-@section('js')
-
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap5.min.js"></script>
-<script>
-    $(document).ready(function() {
-    $('companies').DataTable();
-} );
-</script>
 @endsection

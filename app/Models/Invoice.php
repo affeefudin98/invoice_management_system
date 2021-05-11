@@ -11,8 +11,8 @@ class Invoice extends Model
     protected $fillable = [
         'date_created',
         'due_date',
-        'sender',
-        'receiver',
+        'sender_id',
+        'receiver_id',
         'note',
         'term',
         'company_id',
@@ -32,14 +32,20 @@ class Invoice extends Model
     }
 
     //one invoice belongs to one company
-    public function company() 
+    public function sender() 
     {
-        return $this->belongsTo(Company::class);
+        return $this->belongsTo(Company::class, 'sender_id');
     }
+
+     //one invoice belongs to one company
+     public function receiver() 
+     {
+         return $this->belongsTo(Company::class, 'receiver_id');
+     }
 
     //one invoice belongs to one payment method
     public function paymethod() 
     {
-        return $this->belongsTo(Paymenthod::class);
+        return $this->belongsTo(Paymethod::class);
     }
 }

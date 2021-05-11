@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -24,17 +25,23 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/companies', 'CompanyController@index')->name('companies.index');
 Route::get('/add-company', 'CompanyController@create')->name('companies.create');
 Route::post('/store-company', 'CompanyController@store')->name('companies.store');
-Route::get('/generate-pdf', 'CompanyController@pdfview')->name('companies.pdfview');
+Route::get('/pdf-company', 'CompanyController@pdfview')->name('companies.pdf');
 
 Route::get('/products', 'ProductController@index')->name('products.index');
 Route::get('/add-product', 'ProductController@create')->name('products.create');
 Route::post('/store-product', 'ProductController@store')->name('products.store');
+Route::get('/pdf-product', 'ProductController@pdfview')->name('products.pdf');
 
 Route::get('/paymethods', 'PaymethodController@index')->name('paymethods.index');
 Route::get('/add-paymethod', 'PaymethodController@create')->name('paymethods.create');
 Route::post('/store-paymethod', 'PaymethodController@store')->name('paymethods.store');
+Route::get('/pdf-paymethod', 'PaymethodController@pdfview')->name('paymethods.pdf');
 
 Route::get('/invoices', 'InvoiceController@index')->name('invoices.index');
 Route::get('/add-invoice', 'InvoiceController@create')->name('invoices.create');
 Route::post('/store-invoice', 'InvoiceController@store')->name('invoices.store');
+Route::get('/pdf-invoice', 'InvoiceController@pdfview')->name('invoices.pdf');
 
+//pdf test
+Route::get('/pdf/preview', 'PdfController@index')->name('pdf.preview');
+Route::get('/pdf/generate', 'PdfController@create')->name('pdf.generate');

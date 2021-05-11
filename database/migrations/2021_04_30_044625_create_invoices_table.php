@@ -17,16 +17,17 @@ class CreateInvoicesTable extends Migration
             $table->id();
             $table->timestamp('date_created');
             $table->timestamp('due_date');
-            $table->string('sender');
-            $table->string('receiver');
             $table->string('note');
             $table->string('term');
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
 
-            $table->unsignedBigInteger('company_id');
-            $table->foreign('company_id')->references('id')->on('companies');
+            $table->unsignedBigInteger('sender_id');
+            $table->foreign('sender_id')->references('id')->on('companies');
+
+            $table->unsignedBigInteger('receiver_id');
+            $table->foreign('receiver_id')->references('id')->on('companies');
 
             $table->unsignedBigInteger('paymethod_id');
             $table->foreign('paymethod_id')->references('id')->on('paymethods');

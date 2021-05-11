@@ -7,6 +7,7 @@ use App\Models\Invoice;
 use App\Models\Company;
 use App\Models\Product;
 use App\Models\Paymethod;
+use PDF;
 
 class InvoiceController extends Controller
 {
@@ -29,18 +30,22 @@ class InvoiceController extends Controller
         $this->validate(request(), [
             'date_created' => 'required',
             'due_date'=>'required',
-            'sender'=>'required',
-            'receiver'=>'required',
-            'term'=>'required'
+            'sender_id'=>'required',
+            'receiver_id'=>'required',
+            'term'=>'required',
+            'company_id'=>'required',
+            'paymethod_id'=>'required'
         ]);
 
         auth()->user()->invoices()->create([
             'date_created'=>$request->date_created,
             'due_date'=>$request->due_date,
-            'sender'=>$request->sender,
-            'receiver'=>$request->receiver,
+            'sender_id'=>$request->sender_id,
+            'receiver_id'=>$request->receiver_id,
             'note'=>$request->note,
-            'term'=>$request->term
+            'term'=>$request->term,
+            'company_id'=>$request->company_id,
+            'paymethod_id'=>$request->paymethod_id
         ]);
 
         /*if ($request->produts) {
@@ -50,6 +55,22 @@ class InvoiceController extends Controller
         session()->flash('success', 'Invoice created and send to client successfully.');
 
         return redirect('/invoices');
+        
+    }
+
+    public function pdfview(Request $request)
+    {
+        $invoices = Invoice::all(); 
+       
+        //load path 
+        $pdf = PDF::loadView('invoices.pdf',compact('invoices')); 
+        //name of download file 
+        return $pdf->download('ListInvoices.pdf');
+        //return $pdf->stream();
+
+        // For send by email, I use :
+        // $file = PDF::loadView('invoices', $data)->stream(); $message->attachData($file, $filename, [ 'mime' => 'application/pdf', ]);
+
         
     }
 

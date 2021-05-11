@@ -27,7 +27,7 @@ class CompanyController extends Controller
             'contact'=>'required',
             'email'=>'required',
             'PIC_name'=>'required',
-            'PIC_id'=>'required|numeric'
+            'PIC_id'=>'required|numeric'          
         ]);
 
         auth()->user()->companies()->create([
@@ -48,15 +48,18 @@ class CompanyController extends Controller
 
     public function pdfview(Request $request)
     {
-        $data = Company::all();
+        $companies = Company::all(); 
+       
+        //load path 
+        $pdf = PDF::loadView('companies.pdf',compact('companies')); 
+        //name of download file 
+        return $pdf->download('ListCompanies.pdf');
+        //return $pdf->stream();
 
-        // share data to view
-        view()->share('companies',$data);
-        PDF::setOptions(['dpi'=>'150', 'defaultFault' => 'sans-senrif']);
-        $pdf = PDF::loadView('pdf_view', $data);
-  
-        // download PDF file with download method
-        return $pdf->download('pdf_file.pdf');
+        // For send by email, I use :
+        // $file = PDF::loadView('invoices', $data)->stream(); $message->attachData($file, $filename, [ 'mime' => 'application/pdf', ]);
+
+        
     }
 
 }

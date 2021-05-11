@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use PDF;
 
 class ProductController extends Controller
 {
@@ -34,6 +35,22 @@ class ProductController extends Controller
         session()->flash('success', 'Product added successfully.');
 
         return redirect('/products');
+        
+    }
+
+    public function pdfview(Request $request)
+    {
+        $products = Product::all(); 
+       
+        //load path 
+        $pdf = PDF::loadView('products.pdf',compact('products')); 
+        //name of download file 
+        return $pdf->download('ListProducts.pdf');
+        //return $pdf->stream();
+
+        // For send by email, I use :
+        // $file = PDF::loadView('invoices', $data)->stream(); $message->attachData($file, $filename, [ 'mime' => 'application/pdf', ]);
+
         
     }
 }

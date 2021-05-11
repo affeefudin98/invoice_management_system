@@ -45,6 +45,8 @@ $app->singleton(
     Barryvdh\DomPDF\ServiceProvider::class
 );
 
+//$app->configure('dompdf');
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application
