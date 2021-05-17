@@ -32,8 +32,8 @@ class InvoiceController extends Controller
             'due_date'=>'required',
             'sender_id'=>'required',
             'receiver_id'=>'required',
+            'product_id'=>'required',
             'term'=>'required',
-            'company_id'=>'required',
             'paymethod_id'=>'required'
         ]);
 
@@ -42,9 +42,9 @@ class InvoiceController extends Controller
             'due_date'=>$request->due_date,
             'sender_id'=>$request->sender_id,
             'receiver_id'=>$request->receiver_id,
+            'product_id'=>$request->product_id,
             'note'=>$request->note,
             'term'=>$request->term,
-            'company_id'=>$request->company_id,
             'paymethod_id'=>$request->paymethod_id
         ]);
 
@@ -69,8 +69,20 @@ class InvoiceController extends Controller
         //return $pdf->stream();
 
         // For send by email, I use :
-        // $file = PDF::loadView('invoices', $data)->stream(); $message->attachData($file, $filename, [ 'mime' => 'application/pdf', ]);
+        // $file = PDF::loadView('invoices', $data)->stream(); $message->attachData($file, $filename, [ 'mime' => 'application/pdf', ]); 
+    }
 
+    public function edit(Invoice $invoice)
+    {
+        return view('invoices.create') 
+        -> with('invoice', $invoice)
+        ->with('companies', Company::all())
+        ->with('products', Product::all())
+        ->with('paymethods', Paymethod::all());
+    }
+
+    public function update()
+    {
         
     }
 

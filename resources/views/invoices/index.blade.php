@@ -23,11 +23,11 @@
 
                         <a href="{{ route('invoices.create') }}" class="btn btn-success">Create New Invoice</a>
                         
-                        {{-- <div class="input-group">
+                       <div class="input-group">
                             <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
                               aria-describedby="search-addon" />
                             <button type="button" class="btn btn-outline-primary">search</button>
-                        </div> --}}
+                        </div>
                       
 
                         <div class="datatable">
@@ -42,19 +42,24 @@
                                         <th>Term</th>
                                         <th>Date created</th>
                                         <th>Due date</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($invoices as $invoice)
                                     <tr>
                                         {{-- <td>{{ $invoice->products->total_price }}</td> --}}
-                                        <td>{{ $invoice->company->name }}</td>
-                                        <td>{{ $invoice->company->name}}</td>
+                                        <td>{{ $invoice->sender->name }}</td>
+                                        <td>{{ $invoice->receiver->name}}</td>
                                         <td>{{ $invoice->paymethod->bank_name }}</td>
                                         <td>{{ $invoice->note }}</td>
                                         <td>{{ $invoice->term }}</td>
                                         <td>{{ $invoice->date_created }}</td>
                                         <td>{{ $invoice->due_date }}</td>
+                                        <td>
+                                            <a href="/invoice/{{$invoice -> id}}" class="btn btn-primary btn-sm float-end">View</a>
+                                            <a href="{{ route('invoices.edit', $invoice->id) }}" class="btn btn-warning btn-sm float-end">Edit</a>
+                                        </td>
                                     </tr>
                                         
                                     @endforeach
@@ -67,4 +72,4 @@
             </div>
         </div>
     </div>
-@endsection
+@endsection 

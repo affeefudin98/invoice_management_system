@@ -12,7 +12,7 @@ class Product extends Model
     protected $fillable = [
         'name',
         'description',
-        'price',
+        'price'
     ];
 
     //one product belongs to many company

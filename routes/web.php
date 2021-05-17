@@ -41,6 +41,8 @@ Route::get('/invoices', 'InvoiceController@index')->name('invoices.index');
 Route::get('/add-invoice', 'InvoiceController@create')->name('invoices.create');
 Route::post('/store-invoice', 'InvoiceController@store')->name('invoices.store');
 Route::get('/pdf-invoice', 'InvoiceController@pdfview')->name('invoices.pdf');
+Route::get('/invoice/{invoice}/edit', 'InvoiceController@edit')->name('invoices.edit');
+
 
 //pdf test
 Route::get('/pdf/preview', 'PdfController@index')->name('pdf.preview');

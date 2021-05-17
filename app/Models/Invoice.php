@@ -13,9 +13,9 @@ class Invoice extends Model
         'due_date',
         'sender_id',
         'receiver_id',
+        'product_id',
         'note',
         'term',
-        'company_id',
         'paymethod_id'
     ];
 
