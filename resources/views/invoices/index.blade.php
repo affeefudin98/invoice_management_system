@@ -57,8 +57,9 @@
                                         <td>{{ $invoice->date_created }}</td>
                                         <td>{{ $invoice->due_date }}</td>
                                         <td>
-                                            <a href="/invoice/{{$invoice -> id}}" class="btn btn-primary btn-sm float-end">View</a>
-                                            <a href="{{ route('invoices.edit', $invoice->id) }}" class="btn btn-warning btn-sm float-end">Edit</a>
+                                            <a href="{{ route('invoices.view', $invoice->id) }}" class="btn btn-primary btn-sm float-end">View</a><br>
+                                            <a href="{{ route('invoices.edit', $invoice->id) }}" class="btn btn-warning btn-sm float-end">Edit</a><br>
+                                            <a href="#" class="btn btn-danger btn-sm float-end">Delete</a>
                                         </td>
                                     </tr>
                                         

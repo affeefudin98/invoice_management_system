@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
             'name' => 'admin',
             'ic_no'=>'123',
             'email'=>'a@a.com',
-            'password'=>'123456789'
+            'password' => Hash::make('abcd1234')
             
         ]);
     }

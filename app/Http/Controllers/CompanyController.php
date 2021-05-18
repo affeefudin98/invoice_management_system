@@ -62,4 +62,40 @@ class CompanyController extends Controller
         
     }
 
+    public function edit(Company $companies)
+    {
+        return view('companies.create')->with('companies', $companies);
+    }
+
+    public function update(Request $request, Company $companies)
+    {
+        $this->validate(request(), [
+            'name'=>'required',
+            'address'=>'required',
+            'contact'=>'required',
+            'email'=>'required',
+            'PIC_name'=>'required',
+            'PIC_id'=>'required|numeric'          
+        ]);
+
+        $data=$request->all();
+
+        $companies->name = $data['name']; 
+        $companies->address = $data['address']; 
+        $companies->contact = $data['contact']; 
+        $companies->email = $data['email']; 
+        $companies->PIC_name = $data['PIC_name']; 
+        $companies->PIC_id = $data['PIC_id']; 
+
+        $companies->update($data);
+        session()->flash('success', 'Company edit successfully.');
+
+        return redirect('/companies');
+    }
+
+    public function destroy()
+    {
+        //
+    }
+
 }

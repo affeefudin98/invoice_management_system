@@ -6,7 +6,7 @@
             <div class="col-md-8">
 
                 <div class="card">
-                    <div class="card-header">{{ __('NEW PAYMENT METHOD') }}</div>
+                    <div class="card-header">{{ (isset($paymethods)? 'Edit Payment Method' : 'New Payment Method') }}</div>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -27,19 +27,19 @@
                             </div>
                          @endif
 
-                        <form action="{{ route('paymethods.store') }}" method="POST">
+                        <form action="{{ isset($paymethods)?route('paymethods.update',$paymethods) : route('paymethods.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label for="bank_name">Bank Name</label>
-                                <input type="text" class="form-control" id="bank_name" name="bank_name" placeholder="Enter bank name">
+                                <input type="text" class="form-control" id="bank_name" name="bank_name" placeholder="Enter bank name" value="{{isset($paymethods) ?  $paymethods->bank_name : ''}}" required>
                             </div>
                             <div class="form-group">
                                 <label for="bank_no">Bank Number</label>
-                                <input type="text" class="form-control" id="bank_no" name="bank_no" placeholder="Enter bank number">
+                                <input type="text" class="form-control" id="bank_no" name="bank_no" placeholder="Enter bank number" value="{{isset($paymethods) ?  $paymethods->bank_no : ''}}" required>
                             </div>
                             <div class="form-group">
                                 <label for="method">Method</label>
-                                <input type="text" class="form-control" id="method" name="method" placeholder="Enter method">
+                                <input type="text" class="form-control" id="method" name="method" placeholder="Enter method" value="{{isset($paymethods) ?  $paymethods->method : ''}}" required>
                             </div>
                           
                             <button class="btn btn-success">Add Paymethod</button>

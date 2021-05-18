@@ -41,6 +41,7 @@
                                         <th>Website</th>
                                         <th>PIC Name</th>
                                         <th>PIC No</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -53,6 +54,10 @@
                                         <td>{{ $company->website }}</td>
                                         <td>{{ $company->PIC_name }}</td>
                                         <td>{{ $company->PIC_id }}</td>
+                                        <td>
+                                            <a href="{{ route('companies.edit', $company->id) }}" class="btn btn-warning btn-sm float-end">Edit</a>
+                                            <a href="#" class="btn btn-danger btn-sm float-end">Delete</a>
+                                        </td>
                                     </tr>
                                         
                                     @endforeach

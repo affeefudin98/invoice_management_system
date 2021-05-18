@@ -37,6 +37,7 @@
                                         <th>Bank Name</th>
                                         <th>Bank Number</th>
                                         <th>Method</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -45,6 +46,10 @@
                                         <td>{{ $paymethod->bank_name }}</td>
                                         <td>{{ $paymethod->bank_no }}</td>
                                         <td>{{ $paymethod->method }}</td>
+                                        <td>
+                                            <a href="{{ route('paymethods.edit', $paymethod->id) }}" class="btn btn-warning btn-sm float-end">Edit</a>
+                                            <a href="#" class="btn btn-danger btn-sm float-end">Delete</a>
+                                        </td>
                                     </tr>
                                         
                                     @endforeach

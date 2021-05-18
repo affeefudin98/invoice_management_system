@@ -50,9 +50,37 @@ class PaymethodController extends Controller
         //return $pdf->stream();
 
         // For send by email, I use :
-        // $file = PDF::loadView('invoices', $data)->stream(); $message->attachData($file, $filename, [ 'mime' => 'application/pdf', ]);
+        // $file = PDF::loadView('invoices', $data)->stream(); $message->attachData($file, $filename, [ 'mime' => 'application/pdf', ]); 
+    }
 
-        
+    public function edit(Paymethod $paymethods)
+    {
+        return view('paymethods.create')->with('paymethods', $paymethods);
+    }
+
+    public function update(Request $request, Paymethod $paymethods)
+    {
+        $this->validate(request(), [
+            'bank_name' => 'required',
+            'bank_no'=>'required|numeric',
+            'method'=>'required'
+        ]);
+
+        $data=$request->all();
+
+        $paymethods->bank_name = $data['bank_name']; 
+        $paymethods->bank_no = $data['bank_no']; 
+        $paymethods->method = $data['method']; 
+
+        $paymethods->update($data);
+        session()->flash('success', 'Payment Method updated successfully.');
+
+        return redirect('/paymethods');
+    }
+
+    public function destroy()
+    {
+        //
     }
 
 }

@@ -6,7 +6,7 @@
             <div class="col-md-8">
 
                 <div class="card">
-                    <div class="card-header">{{ __('NEW PRODUCT') }}</div>
+                    <div class="card-header">{{ (isset($products)? 'Edit Product' : 'New Product') }}</div>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -27,22 +27,22 @@
                             </div>
                          @endif
 
-                        <form action="{{ route('products.store') }}" method="POST">
+                        <form action="{{ isset($products)?route('products.update',$products) : route('products.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter product name">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter product name" value="{{isset($products) ?  $products->name : ''}}" required>
                             </div>
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <input type="text" class="form-control" id="description" name="description" placeholder="Enter description">
+                                <input type="text" class="form-control" id="description" name="description" placeholder="Enter description" value="{{isset($products)? $products->description : ''}}">
                             </div>
                             <div class="form-group">
                                 <label for="price">Price</label>
-                                <input type="text" class="form-control" id="price" name="price" placeholder="Enter price">
+                                <input type="text" class="form-control" id="price" name="price" placeholder="Enter price" value="{{isset($products)? $products->price : ''}}" required>
                             </div>
                           
-                            <button class="btn btn-success">Add Product</button>
+                            <button class="btn btn-success">{{ (isset($products)? 'Update Product' : 'Add Product') }}</button>
 
                         </form>         
                     </div>

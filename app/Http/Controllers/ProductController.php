@@ -51,6 +51,34 @@ class ProductController extends Controller
         // For send by email, I use :
         // $file = PDF::loadView('invoices', $data)->stream(); $message->attachData($file, $filename, [ 'mime' => 'application/pdf', ]);
 
-        
+    }
+
+    public function edit(Product $products)
+    {
+        return view('products.create')->with('products', $products);
+    }
+
+    public function update(Request $request, Product $products)
+    {
+        $this->validate(request(), [
+            'name'=>'required',
+            'price'=>'required|numeric'
+        ]);
+
+        $data=$request->all();
+
+        $products->name = $data['name']; 
+        $products->description = $data['description']; 
+        $products->price = $data['price']; 
+
+        $products->update($data);
+        session()->flash('success', 'Product updated successfully.');
+
+        return redirect('/products');
+    }
+
+    public function destroy()
+    {
+        //
     }
 }
