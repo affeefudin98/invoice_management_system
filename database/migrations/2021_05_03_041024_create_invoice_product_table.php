@@ -14,11 +14,11 @@ class CreateInvoiceProductTable extends Migration
     public function up()
     {
         Schema::create('invoice_product', function (Blueprint $table) {
-            $table->id();
-            $table->integer('quantity');
-            $table->double('discount');
-            $table->double('sub_total');
-            $table->double('total_price');
+
+            // $table->integer('quantity');
+            // $table->double('discount');
+            // $table->double('sub_total');
+            // $table->double('total_price');
 
             $table->unsignedBigInteger('invoice_id');
             $table->foreign('invoice_id')->references('id')->on('invoices');
@@ -26,7 +26,7 @@ class CreateInvoiceProductTable extends Migration
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products');
 
-            $table->timestamps();
+            //$table->timestamps();
         });
     }
 

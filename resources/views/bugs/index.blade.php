@@ -35,10 +35,9 @@
                                 <thead>
                                     <tr>
                                         {{-- <th>Total Owed</th> --}}
-                                        <th>Invoice No</th>
+                                        <th>Invoice Nofsdfs</th>
                                         <th>From</th>
                                         <th>To</th>
-                                        {{-- <th>Product</th> --}}
                                         <th>Paymethod</th>
                                         <th>Note</th>
                                         <th>Term</th>
@@ -54,15 +53,14 @@
                                         <td>{{ $invoice->id }}</td>
                                         <td>{{ $invoice->sender->name }}</td>
                                         <td>{{ $invoice->receiver->name}}</td>
-                                        {{-- <td>{{ $invoice->products->name }}</td>  error --}}
                                         <td>{{ $invoice->paymethod->bank_name }}</td>
                                         <td>{{ $invoice->note }}</td>
                                         <td>{{ $invoice->term }}</td>
                                         <td>{{ $invoice->date_created }}</td>
                                         <td>{{ $invoice->due_date }}</td>
                                         <td>
-                                            <a href="{{ route('invoice.view', $invoice->id) }}" class="btn btn-primary btn-sm float-end">View</a><br>
-                                            <a href="{{ route('invoice.edit', $invoice->id) }}" class="btn btn-warning btn-sm float-end">Edit</a><br>
+                                            <a href="{{ route('invoices.view', $invoice->id) }}" class="btn btn-primary btn-sm float-end">View</a><br>
+                                            <a href="{{ route('invoices.edit', $invoice->id) }}" class="btn btn-warning btn-sm float-end">Edit</a><br>
                                             <a href="{{ route('invoice.destroy', $invoice->id) }}" class="btn btn-danger btn-sm float-end">Delete</a>
                                         </td>
                                     </tr>

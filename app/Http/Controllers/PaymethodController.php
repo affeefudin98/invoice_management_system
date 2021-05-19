@@ -10,7 +10,7 @@ class PaymethodController extends Controller
 {
     public function index()
     {
-        return view('paymethods.index')->with('paymethods', Paymethod::all());
+        return view('paymethods.index')->with('paymethods', auth()->user()->paymethods);
     }
 
 
@@ -78,9 +78,13 @@ class PaymethodController extends Controller
         return redirect('/paymethods');
     }
 
-    public function destroy()
+    public function destroy(Paymethod $paymethod)
     {
-        //
+        $paymethod -> delete();
+
+        session()->flash('success', 'Paymethod deleted successfully.');
+
+        return redirect('/paymethods');
     }
 
 }

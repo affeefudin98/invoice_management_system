@@ -56,7 +56,7 @@
                                         <td>{{ $company->PIC_id }}</td>
                                         <td>
                                             <a href="{{ route('companies.edit', $company->id) }}" class="btn btn-warning btn-sm float-end">Edit</a>
-                                            <a href="#" class="btn btn-danger btn-sm float-end">Delete</a>
+                                            <a href="{{ route('companies.destroy', $company->id) }}" class="btn btn-danger btn-sm float-end">Delete</a>
                                         </td>
                                     </tr>
                                         

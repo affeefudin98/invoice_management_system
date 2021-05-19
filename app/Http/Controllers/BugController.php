@@ -2,27 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Invoice;
 use App\Models\Company;
 use App\Models\Product;
 use App\Models\Paymethod;
-use PDF;
 
-class InvoiceController extends Controller
+use Illuminate\Http\Request;
+
+class BugController extends Controller
 {
     public function index()
     {
-        return view('invoices.index')->with('invoices', auth()->user()->invoices);
+        return view('bugs.index')->with('invoices', auth()->user()->invoices);
     }
 
 
     public function create()
     {
-        return view('invoices.create')
+        return view('bugs.create')
         ->with('companies', auth()->user()->companies)
         ->with('products', auth()->user()->products)
         ->with('paymethods', auth()->user()->paymethods);
+        // ->with('companies', Company::all())
+        // ->with('products', Product::all())
+        // ->with('paymethods', Paymethod::all());
     }
 
     public function store(Request $request)
@@ -58,9 +61,16 @@ class InvoiceController extends Controller
         
     }
 
+    Public function view(Invoice $invoice)
+    {
+        return view('bugs.view')
+        ->with('invoice', $invoice);
+        
+    }
+
     public function pdfview(Request $request)
     {
-        $invoices = Invoice::all(); 
+        $invoice = auth()->user()->invoices; 
        
         //load path 
         $pdf = PDF::loadView('invoices.pdf',compact('invoices')); 
@@ -72,10 +82,10 @@ class InvoiceController extends Controller
         // $file = PDF::loadView('invoices', $data)->stream(); $message->attachData($file, $filename, [ 'mime' => 'application/pdf', ]); 
     }
 
-    public function edit(Invoice $invoice)
+    public function edit(Invoice $invoices)
     {
         return view('invoices.edit') 
-        ->with('invoice', $invoice)
+        ->with('invoices', $invoices)
         ->with('companies', auth()->user()->companies)
         ->with('products', auth()->user()->products)
         ->with('paymethods', auth()->user()->paymethods);
@@ -111,29 +121,29 @@ class InvoiceController extends Controller
         return redirect('/invoices');
 
     }
-    Public function view(Invoice $invoice)
-     {
-         return view('invoices.view')
-         ->with('invoice', $invoice)
-         ->with('companies', auth()->user()->companies)
-         ->with('products', auth()->user()->products)
-         ->with('paymethods', auth()->user()->paymethods);
-    }
+    // Public function view(Invoice $invoice)
+    // {
+    //     return view('invoices.view')
+    //     ->with('invoice', $invoice)
+    //     ->with('companies', auth()->user()->companies)
+    //     ->with('products', auth()->user()->products)
+    //     ->with('paymethods', auth()->user()->paymethods);
+    // }
 
-     public function download(Request $request, Invoice $invoice)
-     {
-         $invoice = Invoice::all(); 
+    // public function download(Request $request, Invoice $invoice)
+    // {
+    //     $invoice = Invoice::all(); 
        
-         //load path 
-         $pdf = PDF::loadView('invoices.view',compact('invoice')); 
-         //return view('invoices.view', compact('invoice'));
-         //name of download file 
-         return $pdf->download('Invoice{invoice}.pdf');
-         //return $pdf->stream();
+    //     //load path 
+    //     $pdf = PDF::loadView('invoices.view',compact('invoice')); 
+    //     //return view('invoices.view', compact('invoice'));
+    //     //name of download file 
+    //     return $pdf->download('Invoice{invoice}.pdf');
+    //     //return $pdf->stream();
 
-         // For send by email, I use :
-         // $file = PDF::loadView('invoices', $data)->stream(); $message->attachData($file, $filename, [ 'mime' => 'application/pdf', ]); 
-    }
+    //     // For send by email, I use :
+    //     // $file = PDF::loadView('invoices', $data)->stream(); $message->attachData($file, $filename, [ 'mime' => 'application/pdf', ]); 
+    // }
 
     public function destroy(Invoice $invoice)
     {
@@ -143,5 +153,4 @@ class InvoiceController extends Controller
 
         return redirect('/invoices');
     }
-
 }

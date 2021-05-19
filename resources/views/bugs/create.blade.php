@@ -7,10 +7,15 @@
 
                 <div class="card">
                     <div class="card-header">
-                         Invoice #{{$invoice->id}}
+                        New Invoice
                     </div>
 
                     <div class="card-body">
+                        @if (session('status'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('status') }}
+                            </div>
+                        @endif
                         
                         @if ($errors->any())
                             <div class="alert alert-danger">
@@ -24,17 +29,20 @@
                             </div>
                          @endif
 
- 
+                        
+                        <form action="{{ route('invoices.store') }}" method="POST">
+                            @csrf
+                            
                             <div class="card-header p-4 p-md-5 border-bottom-0 bg-gradient-primary-to-secondary text-white-50">
                                 <div class="row justify-content-between align-items-center">  
                                     <div class="col-5 col-lg-auto text-center text-lg-left">
                                         <!-- Invoice details-->
-                                        <div class="h3 text-white">Invoice #{{$invoice->id}} </div>
+                                        <div class="h3 text-white">New Invoice</div>
                                         Date Created:
-                                        <input type="date" class="form-control" id="date_created" name="date_created" value="{{ $invoice->date_created }}"/>
+                                        <input type="date" class="form-control" id="date_created" name="date_created" required > 
                                     </div>
                                     <div class="col-5 col-lg-auto text-center text-lg-left">
-                                        <br>Due Date:<input type="date" class="form-control" id="due_date" name="due_date" value="{{ $invoice->due_date }}">
+                                        <br>Due Date:<input type="date" class="form-control" id="due_date" name="due_date" required>
                                     </div>
                                    
                                 </div>
@@ -56,37 +64,20 @@
                                             <tr class="border-bottom">
                                                 <td>
                                                     <div class="font-weight-bold">
-                                                        {{-- <select name="product_id" id="product_id" class="form-control">
-                                                            <option value="{{ $invoice->products->id }}"> {{ $invoice->products->name }} </option>
-                                                        </select> --}}
+                                                        <select name="product_id" id="product_id" class="form-control" required>
+                                                            @foreach ($products as $product)
+                                                                <option value="{{ $product->id }}"> {{ $product->name }} </option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                 </td>
-                                                <td class="text-right font-weight-bold">
+                                                <td class="text-right font-weight-bold" required>
                                                     <input type="number" class="form-control" id="" name="" placeholder="Enter quantity">
                                                 </td>
                                                 <td class="text-right font-weight-bold">$50.00</td>
                                                 <td class="text-right font-weight-bold">$600.00</td>
                                             </tr>
-                                            <!-- Invoice item 2-->
-                                            <tr class="border-bottom">
-                                                <td>
-                                                    <div class="font-weight-bold">SB UI Kit Pro</div>
-                                                    <div class="small text-muted d-none d-md-block">A UI toolkit for creating marketing websites and landing pages</div>
-                                                </td>
-                                                <td class="text-right font-weight-bold">15</td>
-                                                <td class="text-right font-weight-bold">$55.00</td>
-                                                <td class="text-right font-weight-bold">$825.00</td>
-                                            </tr>
-                                            <!-- Invoice item 3-->
-                                            <tr class="border-bottom">
-                                                <td>
-                                                    <div class="font-weight-bold">Pro HTML Bundle</div>
-                                                    <div class="small text-muted d-none d-md-block">A fully coded set of UI resources for creating a comprehensive web application</div>
-                                                </td>
-                                                <td class="text-right font-weight-bold">4</td>
-                                                <td class="text-right font-weight-bold">$125.00</td>
-                                                <td class="text-right font-weight-bold">$500.00</td>
-                                            </tr>
+                                           
                                             <!-- Invoice subtotal-->
                                             <tr>
                                                 <td class="text-right pb-0" colspan="3"><div class="text-uppercase small font-weight-700 text-muted">Subtotal:</div></td>
@@ -106,23 +97,27 @@
                                     </table>
                                 </div>
                             </div>
-                            {{-- <div class="card-footer p-4 p-lg-5 border-top-0">
+                            <div class="card-footer p-4 p-lg-5 border-top-0">
                                 <div class="row">
                                     <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
                                         <!-- Invoice - sent to info-->
                                         <div class="small text-muted text-uppercase font-weight-700 mb-2">To</div>
                                         <div class="h6 mb-1">
-                                            <select name="receiver_id" id="receiver_id" class="form-control">
-                                                <option value="{{ $invoice->receiver->id }}"> {{ $invoice->receiver->name }} </option>
-                                            </select> 
+                                            <select name="receiver_id" id="receiver_id" class="form-control" required>
+                                                @foreach ($companies as $company)
+                                                    <option value="{{ $company->id }}"> {{ $company->name }} </option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
                                         <!-- Invoice - sent from info-->
                                         <div class="small text-muted text-uppercase font-weight-700 mb-2">From</div>
                                         <div class="h6 mb-0">
-                                            <select name="sender_id" id="sender_id" class="form-control">
-                                                <option value="{{ $invoice->sender->id }}"> {{ $invoice->sender->name }} </option>
+                                            <select name="sender_id" id="sender_id" class="form-control" required>
+                                                @foreach ($companies as $company)
+                                                    <option value="{{ $company->id }}"> {{ $company->name }} </option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -130,7 +125,7 @@
                                         <!-- Invoice - additional notes-->
                                         <div class="small text-muted text-uppercase font-weight-700 mb-2">Note</div>
                                         <div class="small mb-0">
-                                            <textarea name="note" id="note" cols="30" rows="5" class="form-control">{{$invoice->note}}</textarea>
+                                            <textarea name="note" id="note" cols="30" rows="5" class="form-control" placeholder="Enter notes"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -140,9 +135,11 @@
                                         <!-- Invoice - sent from info-->
                                         <div class="small text-muted text-uppercase font-weight-700 mb-2">Payment Method</div>
                                         <div class="h6 mb-0">
-                                            <select name="paymethod_id" id="paymethod_id" class="form-control" disabled>
-                                                <option value="{{ $invoice->paymethod->id }}" > {{ $invoice->paymethod->bank_name }} </option>
-                                            </select> 
+                                            <select name="paymethod_id" id="paymethod_id" class="form-control" required>
+                                                @foreach ($paymethods as $paymethod)
+                                                    <option value="{{ $paymethod->id }}"> {{ $paymethod->bank_name }} </option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
@@ -150,54 +147,15 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <!-- Invoice - term-->
-                                        <div class="small text-muted text-uppercase font-weight-700 mb-2">Term</div>
+                                        <div class="small text-muted text-uppercase font-weight-700 mb-2" required>Term</div>
                                         <div class="small mb-0">
-                                            <textarea name="term" id="term" cols="30" rows="5" class="form-control">{{$invoice->term}}</textarea>
+                                            <textarea name="term" id="term" cols="30" rows="5" class="form-control" placeholder="Enter terms"></textarea>
                                         </div>
                                     </div>
                                 </div>
-                            </div> --}}
-                            <div class="card-footer p-4 p-lg-5 border-top-0">
-                                <div class="row">
-                                    <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
-                                        <!-- Invoice - sent to info-->
-                                        <div class="small text-muted text-uppercase font-weight-700 mb-2">To</div>
-                                        <div class="h6 mb-1">{{ $invoice->receiver->name }}</div>
-                                        <div class="small">{{ $invoice->receiver->address }}</div>
-                                        <div class="small">{{ $invoice->receiver->contact }}</div>
-                                        <div class="small">{{ $invoice->receiver->email }}</div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
-                                        <!-- Invoice - sent from info-->
-                                        <div class="small text-muted text-uppercase font-weight-700 mb-2">From</div>
-                                        <div class="h6 mb-1">{{ $invoice->sender->name }}</div>
-                                        <div class="small">{{ $invoice->sender->address }}</div>
-                                        <div class="small">{{ $invoice->sender->contact }}</div>
-                                        <div class="small">{{ $invoice->sender->email }}</div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <!-- Invoice - additional notes-->
-                                        <div class="small text-muted text-uppercase font-weight-700 mb-2">Note</div>
-                                        <div class="small mb-0">{{$invoice->note}}</div>
-                                    </div>
-                                </div><br>
-                                <div class="row">
-                                    <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
-                                        <!-- Invoice - sent to info-->
-                                        <div class="small text-muted text-uppercase font-weight-700 mb-2">Payment Method</div>
-                                        <div class="h6 mb-1">{{ $invoice->paymethod->bank_name }}</div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
-                                       
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <!-- Invoice - additional notes-->
-                                        <div class="small text-muted text-uppercase font-weight-700 mb-2">Term</div>
-                                        <div class="small mb-0">{{$invoice->term}}</div>
-                                    </div>
-                                </div>
                             </div>
-                            <a class="btn btn-primary" href="{{ route('invoice.download', $invoice) }}">Download Invoice</a>
+                            <button class="btn btn-success">Create Invoice</button>
+                        </form> 
                     </div>
                 </div>
             </div>

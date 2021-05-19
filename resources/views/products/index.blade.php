@@ -48,7 +48,7 @@
                                         <td>{{ $product->price }}</td>
                                         <td>
                                             <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning btn-sm float-end">Edit</a>
-                                            <a href="#" class="btn btn-danger btn-sm float-end">Delete</a>
+                                            <a href="{{ route('product.destroy', $product->id) }}" class="btn btn-danger btn-sm float-end">Delete</a>
                                         </td>
                                     </tr>
                                         

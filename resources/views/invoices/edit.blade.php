@@ -7,7 +7,6 @@
 
                 <div class="card">
                     <div class="card-header">
-                        {{-- {{ (isset($invoice) ? 'Edit Invoice' : 'New Invoice') }} --}}
                         Edit Invoice
                     </div>
 
@@ -31,7 +30,7 @@
                          @endif
 
 
-                        <form action="{{ route('invoices.update', $invoices) }}" method="POST">
+                        <form action="{{ route('invoices.update', $invoice) }}" method="POST">
                             @csrf
                             
                             <div class="card-header p-4 p-md-5 border-bottom-0 bg-gradient-primary-to-secondary text-white-50">
@@ -40,10 +39,10 @@
                                         <!-- Invoice details-->
                                         <div class="h3 text-white">New Invoice</div>
                                         Date Created:
-                                        <input type="date" class="form-control" id="date_created" name="date_created" value="{{ $invoices->date_created }}"/> 
+                                        <input type="date" class="form-control" id="date_created" name="date_created" value="{{ $invoice->date_created }}"/> 
                                     </div>
                                     <div class="col-5 col-lg-auto text-center text-lg-left">
-                                        <br>Due Date:<input type="date" class="form-control" id="due_date" name="due_date" value="{{ $invoices->due_date }}">
+                                        <br>Due Date:<input type="date" class="form-control" id="due_date" name="due_date" value="{{ $invoice->due_date }}">
                                     </div>
                                    
                                 </div>
@@ -96,6 +95,7 @@
                                                     <div class="small text-muted d-none d-md-block">A fully coded set of UI resources for creating a comprehensive web application</div>
                                                 </td>
                                                 <td class="text-right font-weight-bold">4</td>
+                          
                                                 <td class="text-right font-weight-bold">$125.00</td>
                                                 <td class="text-right font-weight-bold">$500.00</td>
                                             </tr>
@@ -125,7 +125,7 @@
                                         <div class="small text-muted text-uppercase font-weight-700 mb-2">To</div>
                                         <div class="h6 mb-1">
                                             <select name="receiver_id" id="receiver_id" class="form-control">
-                                                <option value="{{ $invoices->receiver->id }}"> {{ $invoices->receiver->name }} </option>
+                                                <option value="{{ $invoice->receiver->id }}"> {{ $invoice->receiver->name }} </option>
                                                 @foreach ($companies as $company)
                                                     <option value="{{ $company->id }}"> {{ $company->name }} </option>
                                                 @endforeach
@@ -137,7 +137,7 @@
                                         <div class="small text-muted text-uppercase font-weight-700 mb-2">From</div>
                                         <div class="h6 mb-0">
                                             <select name="sender_id" id="sender_id" class="form-control">
-                                                <option value="{{ $invoices->sender->id }}"> {{ $invoices->sender->name }} </option>
+                                                <option value="{{ $invoice->sender->id }}"> {{ $invoice->sender->name }} </option>
                                                 @foreach ($companies as $company)
                                                     <option value="{{ $company->id }}"> {{ $company->name }} </option>
                                                 @endforeach
@@ -148,7 +148,7 @@
                                         <!-- Invoice - additional notes-->
                                         <div class="small text-muted text-uppercase font-weight-700 mb-2">Note</div>
                                         <div class="small mb-0">
-                                            <textarea name="note" id="note" cols="30" rows="5" class="form-control">{{$invoices->note}}</textarea>
+                                            <textarea name="note" id="note" cols="30" rows="5" class="form-control">{{$invoice->note}}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -159,7 +159,7 @@
                                         <div class="small text-muted text-uppercase font-weight-700 mb-2">Payment Method</div>
                                         <div class="h6 mb-0">
                                             <select name="paymethod_id" id="paymethod_id" class="form-control">
-                                                <option value="{{ $invoices->paymethod->id }}"> {{ $invoices->paymethod->bank_name }} </option>
+                                                <option value="{{ $invoice->paymethod->id }}"> {{ $invoice->paymethod->bank_name }} </option>
                                                 @foreach ($paymethods as $paymethod)
                                                     <option value="{{ $paymethod->id }}"> {{ $paymethod->bank_name }} </option>
                                                 @endforeach
@@ -173,7 +173,7 @@
                                         <!-- Invoice - term-->
                                         <div class="small text-muted text-uppercase font-weight-700 mb-2">Term</div>
                                         <div class="small mb-0">
-                                            <textarea name="term" id="term" cols="30" rows="5" class="form-control">{{$invoices->term}}</textarea>
+                                            <textarea name="term" id="term" cols="30" rows="5" class="form-control">{{$invoice->term}}</textarea>
                                         </div>
                                     </div>
                                 </div>

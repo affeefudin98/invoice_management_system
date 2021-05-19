@@ -10,7 +10,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        return view('products.index')->with('products', Product::all());
+        return view('products.index')->with('products', auth()->user()->products);
     }
 
 
@@ -77,8 +77,12 @@ class ProductController extends Controller
         return redirect('/products');
     }
 
-    public function destroy()
+    public function destroy(Product $product)
     {
-        //
+        $product -> delete();
+
+        session()->flash('success', 'Product deleted successfully.');
+
+        return redirect('/products');
     }
 }

@@ -48,7 +48,7 @@
                                         <td>{{ $paymethod->method }}</td>
                                         <td>
                                             <a href="{{ route('paymethods.edit', $paymethod->id) }}" class="btn btn-warning btn-sm float-end">Edit</a>
-                                            <a href="#" class="btn btn-danger btn-sm float-end">Delete</a>
+                                            <a href="{{ route('paymethod.destroy', $paymethod->id) }}" class="btn btn-danger btn-sm float-end">Delete</a>
                                         </td>
                                     </tr>
                                         

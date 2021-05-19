@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Company;
 use PDF;
+use Auth;
 
 use Illuminate\Http\Request;
 
@@ -10,7 +11,7 @@ class CompanyController extends Controller
 {
     public function index()
     {
-        return view('companies.index')->with('companies', Company::all());
+        return view('companies.index')->with('companies', auth()->user()->companies);
     }
 
 
@@ -48,8 +49,10 @@ class CompanyController extends Controller
 
     public function pdfview(Request $request)
     {
-        $companies = Company::all(); 
-       
+        $companies = Company::all();
+        //$companies = auth()->user()->id ;
+
+        //dd($companies);
         //load path 
         $pdf = PDF::loadView('companies.pdf',compact('companies')); 
         //name of download file 
@@ -93,9 +96,13 @@ class CompanyController extends Controller
         return redirect('/companies');
     }
 
-    public function destroy()
+    public function destroy(Company $company)
     {
-        //
+        $company -> delete();
+
+        session()->flash('success', 'Company deleted successfully.');
+
+        return redirect('/companies');
     }
 
 }

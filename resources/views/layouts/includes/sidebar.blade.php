@@ -13,7 +13,7 @@
                 <div class="collapse" id="collapseInvoice" data-parent="#accordionSidenav">
                     <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPagesMenu">
                         <a class="nav-link" href="{{ route('invoices.create') }}">Generate Invoice</a>
-                        <a class="nav-link" href="{{ route('invoices.index') }}">All Invoices</a>
+                        <a class="nav-link" href="{{ route('invoices.index') }}">All Invoices</a> 
                     </nav>
                 </div>
                 <!-- Sidenav Accordion (companies)-->

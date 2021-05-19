@@ -7,7 +7,6 @@
 
                 <div class="card">
                     <div class="card-header">
-                        {{-- {{ (isset($invoice) ? 'Edit Invoice' : 'New Invoice') }} --}}
                         New Invoice
                     </div>
 
@@ -98,7 +97,7 @@
                                 <div class="row justify-content-between align-items-center">  
                                     <div class="col-5 col-lg-auto text-center text-lg-left">
                                         <!-- Invoice details-->
-                                        <div class="h3 text-white">New Invoice</div>
+                                        <div class="h3 text-white">Invoice #</div>
                                         Date Created:
                                         <input type="date" class="form-control" id="date_created" name="date_created" required > 
                                     </div>
@@ -126,6 +125,7 @@
                                                 <td>
                                                     <div class="font-weight-bold">
                                                         <select name="product_id" id="product_id" class="form-control" required>
+                                                            <option value="" selected disabled>Please select</option>
                                                             @foreach ($products as $product)
                                                                 <option value="{{ $product->id }}"> {{ $product->name }} </option>
                                                             @endforeach
@@ -148,16 +148,7 @@
                                                 <td class="text-right font-weight-bold">$55.00</td>
                                                 <td class="text-right font-weight-bold">$825.00</td>
                                             </tr>
-                                            <!-- Invoice item 3-->
-                                            <tr class="border-bottom">
-                                                <td>
-                                                    <div class="font-weight-bold">Pro HTML Bundle</div>
-                                                    <div class="small text-muted d-none d-md-block">A fully coded set of UI resources for creating a comprehensive web application</div>
-                                                </td>
-                                                <td class="text-right font-weight-bold">4</td>
-                                                <td class="text-right font-weight-bold">$125.00</td>
-                                                <td class="text-right font-weight-bold">$500.00</td>
-                                            </tr>
+                                            
                                             <!-- Invoice subtotal-->
                                             <tr>
                                                 <td class="text-right pb-0" colspan="3"><div class="text-uppercase small font-weight-700 text-muted">Subtotal:</div></td>
@@ -183,7 +174,8 @@
                                         <!-- Invoice - sent to info-->
                                         <div class="small text-muted text-uppercase font-weight-700 mb-2">To</div>
                                         <div class="h6 mb-1">
-                                            <select name="receiver_id" id="receiver_id" class="form-control" required>
+                                            <select name="receiver_id" id="receiver_id" class="form-control"  required>`
+                                                <option value="" selected disabled>Please select</option>
                                                 @foreach ($companies as $company)
                                                     <option value="{{ $company->id }}"> {{ $company->name }} </option>
                                                 @endforeach
@@ -195,6 +187,7 @@
                                         <div class="small text-muted text-uppercase font-weight-700 mb-2">From</div>
                                         <div class="h6 mb-0">
                                             <select name="sender_id" id="sender_id" class="form-control" required>
+                                                <option value="" selected disabled>Please select</option>
                                                 @foreach ($companies as $company)
                                                     <option value="{{ $company->id }}"> {{ $company->name }} </option>
                                                 @endforeach
@@ -205,7 +198,7 @@
                                         <!-- Invoice - additional notes-->
                                         <div class="small text-muted text-uppercase font-weight-700 mb-2">Note</div>
                                         <div class="small mb-0">
-                                            <textarea name="note" id="note" cols="30" rows="5" class="form-control"></textarea>
+                                            <textarea name="note" id="note" cols="30" rows="5" class="form-control" placeholder="Enter Notes"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -216,6 +209,7 @@
                                         <div class="small text-muted text-uppercase font-weight-700 mb-2">Payment Method</div>
                                         <div class="h6 mb-0">
                                             <select name="paymethod_id" id="paymethod_id" class="form-control" required>
+                                                <option value="" selected disabled>Please select</option>
                                                 @foreach ($paymethods as $paymethod)
                                                     <option value="{{ $paymethod->id }}"> {{ $paymethod->bank_name }} </option>
                                                 @endforeach
@@ -229,7 +223,7 @@
                                         <!-- Invoice - term-->
                                         <div class="small text-muted text-uppercase font-weight-700 mb-2" required>Term</div>
                                         <div class="small mb-0">
-                                            <textarea name="term" id="term" cols="30" rows="5" class="form-control"></textarea>
+                                            <textarea name="term" id="term" cols="30" rows="5" class="form-control" placeholder="Enter terms"></textarea>
                                         </div>
                                     </div>
                                 </div>
