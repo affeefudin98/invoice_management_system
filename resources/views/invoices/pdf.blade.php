@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -5,7 +6,7 @@
     <title></title>
   </head>
   <body>
-    <table id=invoices class="table table-bordered">
+    <table id=companies class="table table-bordered">
     <thead>
       <tr>
         <th>Invoice No</th>
@@ -19,7 +20,7 @@
       </tr>
       </thead>
       <tbody>
-          @foreach ($invoice as $invoice)
+            @foreach ($invoices as $invoice)
             <tr>
                 <td>{{$invoice->id}}</td>
                 <td>{{$invoice->sender->name}}</td>

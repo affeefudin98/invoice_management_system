@@ -14,19 +14,18 @@ class CreateInvoiceProductTable extends Migration
     public function up()
     {
         Schema::create('invoice_product', function (Blueprint $table) {
-
-            // $table->integer('quantity');
-            // $table->double('discount');
-            // $table->double('sub_total');
-            // $table->double('total_price');
+            $table->id();
 
             $table->unsignedBigInteger('invoice_id');
-            $table->foreign('invoice_id')->references('id')->on('invoices');
+            $table->foreign('invoice_id')->references('id')->on('invoices')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
 
             $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('products');
-
-            //$table->timestamps();
+            $table->foreign('product_id')->references('id')->on('products')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+ 
         });
     }
 

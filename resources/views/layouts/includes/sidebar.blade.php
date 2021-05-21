@@ -2,6 +2,13 @@
     <nav class="sidenav shadow-right sidenav-light">
         <div class="sidenav-menu">
             <div class="nav accordion" id="accordionSidenav">
+                <!-- Sidenav Heading (Addons)-->
+                <div class="sidenav-menu-heading">Home</div>
+                <!-- Sidenav Link (Charts)-->
+                <a class="nav-link" href="{{ route('dashboard.index') }}">
+                    <div class="nav-link-icon"><i data-feather="home"></i></div>
+                    Dashboard
+                </a>
                 <!-- Sidenav Heading (App Views)-->
                 <div class="sidenav-menu-heading">App Views</div>
                 <!-- Sidenav Accordion (Pages)-->

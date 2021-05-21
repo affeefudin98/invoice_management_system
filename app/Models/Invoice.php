@@ -13,7 +13,6 @@ class Invoice extends Model
         'due_date',
         'sender_id',
         'receiver_id',
-        'product_id',
         'note',
         'term',
         'paymethod_id'
@@ -22,8 +21,7 @@ class Invoice extends Model
     //One invoice has many products
     public function products()
     {
-        //return $this->belongsToMany(Product::class);
-        return $this->belongsToMany(Product::class, 'invoice_product', 'invoice_id', 'product_id');
+        return $this->belongsToMany(Product::class);
     }
 
     //One invoice belongs to one user

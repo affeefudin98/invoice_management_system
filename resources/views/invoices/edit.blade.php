@@ -64,12 +64,12 @@
                                             <tr class="border-bottom">
                                                 <td>
                                                     <div class="font-weight-bold">
-                                                        <select name="product_id" id="product_id" class="form-control">
-                                                            {{-- <option value="{{ $invoices->products->id }}"> {{ $invoices->products->id }} </option>  --}}
-                                                            @foreach ($products as $product)
-                                                                <option value="{{ $product->id }}"> {{ $product->name }} </option>
-                                                            @endforeach
-                                                        </select>
+                                                        @foreach ($invoice->products as $product)
+                                                            <div>
+                                                                <i data-feather="check-square" class="mr-3"></i>{{ $product->name }}
+                                                            </div>
+                                                        @endforeach
+                                                
                                                     </div>
                                                 </td>
                                                 <td class="text-right font-weight-bold">
@@ -186,5 +186,6 @@
         </div>
     </div>
 @endsection 
+
 
 

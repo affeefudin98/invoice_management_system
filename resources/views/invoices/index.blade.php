@@ -1,19 +1,36 @@
 @extends('layouts.main')
 
 @section('content')
-    <div class="container">
-        @if (session()->has('success'))
-            <div class="alert alert-success">
-                {{ session()->get('success') }}
-            </div>
-        @endif
-        
-        <div class="row justify-content-center">
-            <div class="col-md-10">
+<html lang="en">
 
-                <div class="card">
-                    <div class="card-header">{{ __('LIST OF INVOICE') }}</div>
+    <body class="nav-fixed">
 
+        <main>
+            @if (session()->has('success'))
+                <div class="alert alert-success">
+                    {{ session()->get('success') }}
+                </div>
+            @endif
+
+            <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
+                <div class="container">
+                    <div class="page-header-content pt-4">
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-auto mt-4">
+                                <h1 class="page-header-title">
+                                    <div class="page-header-icon"><i data-feather="activity"></i></div>
+                                    Invoices
+                                </h1>
+                                <div class="page-header-subtitle">List of invoices generated</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- Main page content-->
+            <div class="container mt-n10">
+                <!-- Example DataTable for Dashboard Demo-->
+                <div class="card mb-4">
                     <div class="card-body">
                         @if (session('status'))
                             <div class="alert alert-success" role="alert">
@@ -21,40 +38,35 @@
                             </div>
                         @endif
 
-                        <a href="{{ route('invoices.create') }}" class="btn btn-success">Create New Invoice</a>
-                        
-                       <div class="input-group">
-                            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
-                              aria-describedby="search-addon" />
-                            <button type="button" class="btn btn-outline-primary">search</button>
-                        </div>
-                      
+                        <a href="{{ route('invoices.create') }}" class="btn btn-success mb-3">Create New Invoice</a>
 
                         <div class="datatable">
-                            <table id="invoices" class="table table-striped" style="width:100%">
+                            <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        {{-- <th>Total Owed</th> --}}
-                                        <th>Invoice No</th>
-                                        <th>From</th>
-                                        <th>To</th>
-                                        {{-- <th>Product</th> --}}
-                                        <th>Paymethod</th>
-                                        <th>Note</th>
-                                        <th>Term</th>
-                                        <th>Date created</th>
-                                        <th>Due date</th>
-                                        <th>Action</th>
+                                        <th>ID</th>
+                                        <th>FROM</th>
+                                        <th>TO</th>
+                                        <th>PRODUCT</th>
+                                        <th>PAYMETHOD</th>
+                                        <th>NOTE</th>
+                                        <th>TERM</th>
+                                        <th>DATE CREATED</th>
+                                        <th>DUE DATE</th>
+                                        <th>ACTION</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($invoices as $invoice)
                                     <tr>
-                                        {{-- <td>{{ $invoice->products->total_price }}</td> --}}
                                         <td>{{ $invoice->id }}</td>
                                         <td>{{ $invoice->sender->name }}</td>
                                         <td>{{ $invoice->receiver->name}}</td>
-                                        {{-- <td>{{ $invoice->products->name }}</td>  error --}}
+                                        <td>
+                                            @foreach ($invoice->products as $product)
+                                            <i data-feather="check"></i>{{ $product->name }} <br>
+                                            @endforeach
+                                        </td> 
                                         <td>{{ $invoice->paymethod->bank_name }}</td>
                                         <td>{{ $invoice->note }}</td>
                                         <td>{{ $invoice->term }}</td>
@@ -66,7 +78,6 @@
                                             <a href="{{ route('invoice.destroy', $invoice->id) }}" class="btn btn-danger btn-sm float-end">Delete</a>
                                         </td>
                                     </tr>
-                                        
                                     @endforeach
                                 </tbody>
                             </table>
@@ -75,6 +86,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-@endsection 
+        </main>
+    
+    </body>
+</html>
+@endsection

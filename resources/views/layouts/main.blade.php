@@ -35,5 +35,7 @@
         <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js" crossorigin="anonymous"></script>
         <script src="{{ asset('admin/assets/demo/date-range-picker-demo.js') }}"></script>
+
+        @yield('scripts')
     </body>
 </html>

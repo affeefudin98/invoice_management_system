@@ -27,30 +27,27 @@ class InvoiceController extends Controller
 
     public function store(Request $request)
     {
+        //dd($request->all());
         $this->validate(request(), [
             'date_created' => 'required',
             'due_date'=>'required',
             'sender_id'=>'required',
             'receiver_id'=>'required',
-            'product_id'=>'required',
             'term'=>'required',
             'paymethod_id'=>'required'
         ]);
 
-        auth()->user()->invoices()->create([
+        $invoices = auth()->user()->invoices()->create([
             'date_created'=>$request->date_created,
             'due_date'=>$request->due_date,
             'sender_id'=>$request->sender_id,
             'receiver_id'=>$request->receiver_id,
-            'product_id'=>$request->product_id,
             'note'=>$request->note,
             'term'=>$request->term,
             'paymethod_id'=>$request->paymethod_id
         ]);
 
-        /*if ($request->produts) {
-            $invoice->products()->attach($request->products);
-        }*/
+        $invoices->products()->sync($request->products);
 
         session()->flash('success', 'Invoice created successfully.');
 
@@ -58,19 +55,12 @@ class InvoiceController extends Controller
         
     }
 
-    public function pdfview(Request $request)
-    {
-        $invoices = Invoice::all(); 
-       
-        //load path 
-        $pdf = PDF::loadView('invoices.pdf',compact('invoices')); 
-        //name of download file 
-        return $pdf->download('ListInvoices.pdf');
-        //return $pdf->stream();
-
-        // For send by email, I use :
-        // $file = PDF::loadView('invoices', $data)->stream(); $message->attachData($file, $filename, [ 'mime' => 'application/pdf', ]); 
-    }
+    private function mapProducts($products)
+{
+    return collect($products)->map(function ($i) {
+        return ['quantity' => $i];
+    });
+}
 
     public function edit(Invoice $invoice)
     {
@@ -88,7 +78,6 @@ class InvoiceController extends Controller
             'due_date'=>'required',
             'sender_id'=>'required',
             'receiver_id'=>'required',
-            'product_id'=>'required',
             'term'=>'required',
             'paymethod_id'=>'required'
         ]);
@@ -99,12 +88,12 @@ class InvoiceController extends Controller
         $invoices->due_date = $data['due_date'];
         $invoices->sender_id = $data['sender_id'];
         $invoices->receiver_id = $data['receiver_id'];
-        $invoices->product_id = $data['product_id'];
         $invoices->note = $data['note'];
         $invoices->term = $data['term'];
         $invoices->paymethod_id = $data['paymethod_id'];
 
         $invoices->update($data);
+
 
         session()->flash('success', 'Invoice updated successfully.');
 
@@ -142,6 +131,21 @@ class InvoiceController extends Controller
         session()->flash('success', 'Invoice deleted successfully.');
 
         return redirect('/invoices');
+    }
+
+    public function pdfview(Request $request)
+    {
+        $invoices = Invoice::all(); 
+        //Chalet::where('user_id',auth()->id())->get());
+       
+        //load path 
+        $pdf = PDF::loadView('invoices.pdf',compact('invoices')); 
+        //name of download file 
+        return $pdf->download('ListInvoices.pdf');
+        //return $pdf->stream();
+
+        // For send by email, I use :
+        // $file = PDF::loadView('invoices', $data)->stream(); $message->attachData($file, $filename, [ 'mime' => 'application/pdf', ]); 
     }
 
 }

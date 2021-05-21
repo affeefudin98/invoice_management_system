@@ -124,16 +124,29 @@
                                             <tr class="border-bottom">
                                                 <td>
                                                     <div class="font-weight-bold">
-                                                        <select name="product_id" id="product_id" class="form-control" required>
-                                                            <option value="" selected disabled>Please select</option>
-                                                            @foreach ($products as $product)
-                                                                <option value="{{ $product->id }}"> {{ $product->name }} </option>
+                                                        {{-- <table>
+                                                            @foreach($products as $product)
+                                                                <tr>
+                                                                    <td><input {{ $product->value ? 'checked' : null }} data-id="{{ $product->id }}" type="checkbox" class="products-enable"></td>
+                                                                    <td>{{ $product->name }}</td>
+                                                                    <td><input type="number" value="{{ $product->value ?? null }}" {{ $product->value ? null : 'disabled' }} data-id="{{ $product->id }}" name="products[{{ $product->id }}]" class="products-quantity form-control" placeholder="Enter Quantity"></td>
+                                                                </tr>
                                                             @endforeach
-                                                        </select>
+                                                        </table> --}}
+
+                                                        @foreach ($products as $product)
+                                
+                                                        <div class="custom-control custom-checkbox ml-4">
+                                                            <input class="custom-control-input" name="products[]" id="{{ $product->id }}" value="{{ $product->id }}" type="checkbox">
+                                                            <label class="custom-control-label" for="{{ $product->id }}">{{ $product->name }}</label>
+                                                            
+                                                        </div>
+                                                        @endforeach
+
                                                     </div>
                                                 </td>
                                                 <td class="text-right font-weight-bold" required>
-                                                    <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Enter quantity">
+                                                    {{-- <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Enter quantity"> --}}
                                                 </td>
                                                 <td class="text-right font-weight-bold">$50.00</td>
                                                 <td class="text-right font-weight-bold">$600.00</td>
@@ -236,5 +249,19 @@
         </div>
     </div>
 @endsection 
+
+@section('scripts')
+    @parent
+    <script>
+        $('document').ready(function () {
+            $('.products-enable').on('click', function () {
+                let id = $(this).attr('data-id')
+                let enabled = $(this).is(":checked")
+                $('.products-quantity[data-id="' + id + '"]').attr('disabled', !enabled)
+                $('.products-quantity[data-id="' + id + '"]').val(null)
+            })
+        });
+    </script>
+@endsection
 
 

@@ -25,6 +25,8 @@ class Product extends Model
     public function invoices()
     {
         return $this->belongsToMany(Invoice::class);
+        // return $this->belongsToMany(Invoice::class, 'invoice_product', 'product_id', 'invoice_id')
+        // ->withTimestamps();
     }
 
     //one product belongs to one user

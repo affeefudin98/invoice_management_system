@@ -20,7 +20,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard.index');
+//Route::get('/dashboard-stat', 'DashboardController@stat')->name('dashboard.stat');
 
 //companies
 Route::get('/companies', 'CompanyController@index')->name('companies.index');
@@ -55,12 +57,13 @@ Route::get('/add-invoice', 'InvoiceController@create')->name('invoices.create');
 Route::post('/store-invoice', 'InvoiceController@store')->name('invoices.store');
 Route::get('/pdf-invoice', 'InvoiceController@pdfview')->name('invoices.pdf');
 Route::get('/invoices/{invoice}', 'InvoiceController@view')->name('invoice.view');
+Route::get('/invoices/{invoice}/edit', 'InvoiceController@edit')->name('invoice.edit');
+Route::post('/invoices/{invoices}/update-invoice', 'InvoiceController@update')->name('invoices.update');
 Route::get('/invoices/{invoice}/delete', 'InvoiceController@destroy')->name('invoice.destroy');
 
 //error
 Route::get('/invoices/download', 'InvoiceController@download')->name('invoice.download');
-Route::get('/invoices/{invoice}/edit', 'InvoiceController@edit')->name('invoice.edit');
-Route::post('/invoices/{invoices}/update-invoice', 'InvoiceController@update')->name('invoices.update');
+
 //pdf test
 Route::get('/pdf/preview', 'PdfController@index')->name('pdf.preview');
 Route::get('/pdf/generate', 'PdfController@create')->name('pdf.generate');

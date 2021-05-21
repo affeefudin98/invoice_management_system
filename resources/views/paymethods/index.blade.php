@@ -1,65 +1,80 @@
-@extends('layouts.main')
+    @extends('layouts.main')
 
-@section('content')
-    <div class="container">
-        @if (session()->has('success'))
-            <div class="alert alert-success">
-                {{ session()->get('success') }}
-            </div>
-        @endif
-        
-        <div class="row justify-content-center">
-            <div class="col-md-10">
-
-                <div class="card">
-                    <div class="card-header">{{ __('LIST OF PAYMENT METHOD') }}</div>
-
-                    <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
+    @section('content')
+    <html lang="en">
+    
+        <body class="nav-fixed">
+    
+            <main>
+                @if (session()->has('success'))
+                    <div class="alert alert-success">
+                        {{ session()->get('success') }}
+                    </div>
+                @endif
+    
+                <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
+                    <div class="container">
+                        <div class="page-header-content pt-4">
+                            <div class="row align-items-center justify-content-between">
+                                <div class="col-auto mt-4">
+                                    <h1 class="page-header-title">
+                                        <div class="page-header-icon"><i data-feather="activity"></i></div>
+                                        Payment Methods
+                                    </h1>
+                                    <div class="page-header-subtitle">List of paymethods</div>
+                                </div>
                             </div>
-                        @endif
-
-                        <a href="{{ route('paymethods.create') }}" class="btn btn-success">Add New Payment Method</a>
-                        
-                        {{-- <div class="input-group">
-                            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
-                              aria-describedby="search-addon" />
-                            <button type="button" class="btn btn-outline-primary">search</button>
-                        </div> --}}
-                      
-
-                        <div class="datatable">
-                            <table id="paymethods" class="table table-striped" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th>Bank Name</th>
-                                        <th>Bank Number</th>
-                                        <th>Method</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($paymethods as $paymethod)
-                                    <tr>
-                                        <td>{{ $paymethod->bank_name }}</td>
-                                        <td>{{ $paymethod->bank_no }}</td>
-                                        <td>{{ $paymethod->method }}</td>
-                                        <td>
-                                            <a href="{{ route('paymethods.edit', $paymethod->id) }}" class="btn btn-warning btn-sm float-end">Edit</a>
-                                            <a href="{{ route('paymethod.destroy', $paymethod->id) }}" class="btn btn-danger btn-sm float-end">Delete</a>
-                                        </td>
-                                    </tr>
-                                        
-                                    @endforeach
-                                </tbody>
-                            </table>
                         </div>
-                        <a class="btn btn-primary" href="{{ route('paymethods.pdf') }}">Export to PDF</a>
+                    </div>
+                </header>
+                <!-- Main page content-->
+                <div class="container mt-n10">
+                    <!-- Example DataTable for Dashboard Demo-->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            @if (session('status'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
+    
+                            <a href="{{ route('paymethods.create') }}" class="btn btn-success mb-3">Create New Payment Method</a>
+    
+                            <div class="datatable">
+                                <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>BANK NAME</th>
+                                            <th>BANK NUMBER</th>
+                                            <th>METHOD</th>
+                                            <th>ACTION</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($paymethods as $paymethod)
+                                        <tr>
+                                            <td>{{ $paymethod->id }}</td>
+                                            <td>{{ $paymethod->bank_name }}</td>
+                                            <td>{{ $paymethod->bank_no }}</td>
+                                            <td>{{ $paymethod->method }}</td>
+                                            <td>
+                                                <a href="{{ route('paymethods.edit', $paymethod->id) }}" class="btn btn-warning btn-sm float-end">Edit</a>
+                                                <a href="{{ route('paymethod.destroy', $paymethod->id) }}" class="btn btn-danger btn-sm float-end">Delete</a>
+                                            </td>
+                                        </tr>
+                                            
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            
+                            </div>
+                            <a class="btn btn-primary" href="{{ route('paymethods.pdf') }}">Export to PDF</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-@endsection
+            </main>
+        
+        </body>
+    </html>
+    @endsection

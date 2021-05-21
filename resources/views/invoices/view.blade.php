@@ -6,10 +6,6 @@
             <div class="col-md-10">
 
                 <div class="card">
-                    <div class="card-header">
-                         Invoice #{{$invoice->id}}
-                    </div>
-
                     <div class="card-body">
                         
                         @if ($errors->any())
@@ -56,13 +52,24 @@
                                             <tr class="border-bottom">
                                                 <td>
                                                     <div class="font-weight-bold">
+                                                       
                                                         {{-- <select name="product_id" id="product_id" class="form-control">
                                                             <option value="{{ $invoice->products->id }}"> {{ $invoice->products->name }} </option>
                                                         </select> --}}
+
+                                                        @foreach ($invoice->products as $product)
+                                
+                                                        <div class="pull-left" class="custom-control custom-checkbox ml-4">
+                                                            {{-- <input class="custom-control-input" name="products[]" id="{{ $product->id }}" value="{{ $product->id }}" type="checkbox" checked>
+                                                            <label class="custom-control-label" for="{{ $product->id }}">{{ $product->name }}</label> --}}
+                                                            <li>{{$product->name}}</li>
+                                                        </div>
+                                                        @endforeach
+
                                                     </div>
                                                 </td>
                                                 <td class="text-right font-weight-bold">
-                                                    <input type="number" class="form-control" id="" name="" placeholder="Enter quantity">
+                                                    {{-- <input type="number" class="form-control" id="" name="" placeholder="Enter quantity"> --}}
                                                 </td>
                                                 <td class="text-right font-weight-bold">$50.00</td>
                                                 <td class="text-right font-weight-bold">$600.00</td>
@@ -185,7 +192,7 @@
                                     <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
                                         <!-- Invoice - sent to info-->
                                         <div class="small text-muted text-uppercase font-weight-700 mb-2">Payment Method</div>
-                                        <div class="h6 mb-1">{{ $invoice->paymethod->bank_name }}</div>
+                                        <div class="h6 mb-1">{{$invoice->paymethod->bank_name}} - {{ $invoice->paymethod->bank_no }}</div>                                 
                                     </div>
                                     <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
                                        
