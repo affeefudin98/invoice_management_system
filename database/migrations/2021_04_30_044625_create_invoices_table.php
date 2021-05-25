@@ -23,9 +23,6 @@ class CreateInvoicesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
 
-            // $table->unsignedBigInteger('product_id');
-            // $table->foreign('product_id')->references('id')->on('products');
-
             $table->unsignedBigInteger('sender_id');
             $table->foreign('sender_id')->references('id')->on('companies');
 

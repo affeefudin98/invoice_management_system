@@ -20,7 +20,9 @@ class User extends Authenticatable
         'name',
         'ic_no',
         'email',
-        'password'
+        'password',
+        'picture',
+        'role'
     ];
 
     /**
@@ -41,6 +43,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function isAdmin()
+    {
+        return $this->role == 'admin';
+    }
+
+    public function isClient()
+    {
+        return $this->role == 'client';
+    }
+
 
     //One user can create many companies
     public function companies()

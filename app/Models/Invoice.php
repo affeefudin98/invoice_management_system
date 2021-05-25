@@ -15,6 +15,10 @@ class Invoice extends Model
         'receiver_id',
         'note',
         'term',
+        'quantity',
+        'subtotal',
+        'tax',
+        'total',
         'paymethod_id'
     ];
 

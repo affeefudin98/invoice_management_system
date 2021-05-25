@@ -5,7 +5,7 @@
                 <!-- Sidenav Heading (Addons)-->
                 <div class="sidenav-menu-heading">Home</div>
                 <!-- Sidenav Link (Charts)-->
-                <a class="nav-link" href="{{ route('dashboard.index') }}">
+                @include('layouts.includes.sidebarDashboard')
                     <div class="nav-link-icon"><i data-feather="home"></i></div>
                     Dashboard
                 </a>
@@ -19,8 +19,9 @@
                 </a>
                 <div class="collapse" id="collapseInvoice" data-parent="#accordionSidenav">
                     <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPagesMenu">
-                        <a class="nav-link" href="{{ route('invoices.create') }}">Generate Invoice</a>
-                        <a class="nav-link" href="{{ route('invoices.index') }}">All Invoices</a> 
+
+                        @include('layouts.includes.sidebarInvoice')
+
                     </nav>
                 </div>
                 <!-- Sidenav Accordion (companies)-->
@@ -31,8 +32,9 @@
                 </a>
                 <div class="collapse" id="collapseCompany" data-parent="#accordionSidenav">
                     <nav class="sidenav-menu-nested nav">
-                        <a class="nav-link" href="{{ route('companies.create') }}">Add Company</a>
-                        <a class="nav-link" href="{{ route('companies.index') }}">All Companies</a>
+                        
+                        @include('layouts.includes.sidebarCompany')
+
                     </nav>
                 </div>
 
@@ -44,8 +46,9 @@
                 </a>
                 <div class="collapse" id="collapseProduct" data-parent="#accordionSidenav">
                     <nav class="sidenav-menu-nested nav">
-                        <a class="nav-link" href="{{ route('products.create') }}">Add Product</a>
-                        <a class="nav-link" href="{{ route('products.index') }}">All Products</a>
+
+                        @include('layouts.includes.sidebarProduct')
+
                     </nav>
                 </div>
 
@@ -57,8 +60,9 @@
                 </a>
                 <div class="collapse" id="collapsePaymethod" data-parent="#accordionSidenav">
                     <nav class="sidenav-menu-nested nav">
-                        <a class="nav-link" href="{{ route('paymethods.create') }}">Add Method</a>
-                        <a class="nav-link" href="{{ route('paymethods.index') }}">All Methods</a>
+
+                        @include('layouts.includes.sidebarPaymethod')
+
                     </nav>
                 </div>
                 

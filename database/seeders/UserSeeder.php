@@ -26,9 +26,19 @@ class UserSeeder extends Seeder
 
          User::create([
             'name' => 'admin',
-            'ic_no'=>'123',
+            'ic_no'=>'987',
             'email'=>'a@a.com',
-            'password' => Hash::make('abcd1234')
+            'password' => Hash::make('abcd1234'),
+            'role'=>'admin'
+            
+        ]);
+
+        User::create([
+            'name' => 'tester1',
+            'ic_no'=>'123',
+            'email'=>'b@b.com',
+            'password' => Hash::make('abcd1234'),
+            'role'=>'client'
             
         ]);
     }

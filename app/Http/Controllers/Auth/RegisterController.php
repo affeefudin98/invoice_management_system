@@ -54,6 +54,7 @@ class RegisterController extends Controller
             'ic_no'=> ['required', 'string', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'role' => ['required'],
         ]);
     }
 
@@ -70,6 +71,7 @@ class RegisterController extends Controller
             'ic_no' => $data['ic_no'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'role' => $data['role'],
         ]);
     }
 }

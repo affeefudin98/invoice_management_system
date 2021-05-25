@@ -1,7 +1,5 @@
 @extends('layouts.main')
 
-
-
 @section('content')
 
 <html lang="en">
@@ -18,15 +16,8 @@
                                     <div class="page-header-icon"><i data-feather="activity"></i></div>
                                     Dashboard
                                 </h1>
-                                <div class="page-header-subtitle">Example dashboard overview and content summary</div>
+                                <div class="page-header-subtitle">Invoice Management System</div>
                             </div>
-                            {{-- <div class="col-12 col-xl-auto mt-4">
-                                <button class="btn btn-white p-3" id="reportrange">
-                                    <i class="mr-2 text-primary" data-feather="calendar"></i>
-                                    <span></span>
-                                    <i class="ml-1" data-feather="chevron-down"></i>
-                                </button>
-                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -40,8 +31,8 @@
                                 <div class="row align-items-center">
                                     <div class="col-xl-8 col-xxl-12">
                                         <div class="text-center text-xl-left text-xxl-center px-4 mb-4 mb-xl-0 mb-xxl-4">
-                                            <h1 class="text-primary">Welcome to SB Admin Pro!</h1>
-                                            <p class="text-gray-700 mb-0">Browse our fully designed UI toolkit! Browse our prebuilt app pages, components, and utilites, and be sure to look at our full documentation!</p>
+                                            <h1 class="text-primary">Welcome {{ Auth::user()->name }}</h1>
+                                            <p class="text-gray-700 mb-0">Intership Task</p>
                                         </div>
                                     </div>
                                 </div>
@@ -63,7 +54,7 @@
                                 </div>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" href="{{ route('invoices.index') }}">View</a>
+                                <a class="small text-white stretched-link" href="{{ route('admin.invoices.index') }}">View</a>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
@@ -80,7 +71,7 @@
                                 </div>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" href="{{ route('companies.index') }}">View</a>
+                                <a class="small text-white stretched-link" href="{{ route('admin.companies.index') }}">View</a>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
@@ -97,7 +88,7 @@
                                 </div>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" href="{{ route('products.index') }}">View</a>
+                                <a class="small text-white stretched-link" href="{{ route('admin.products.index') }}">View</a>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
@@ -114,7 +105,7 @@
                                 </div>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" href="{{ route('paymethods.index') }}">View</a>
+                                <a class="small text-white stretched-link" href="{{ route('admin.paymethods.index') }}">View</a>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
